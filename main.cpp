@@ -9,7 +9,9 @@ int main(int argc, char* argv[])
 				 {5,6,7,8},
 				 {9,10,11,12} };
 
-	std::cout << m.ToString();
+	std::cout << m.ToString() << std::endl;
+
+	std::cout << m.Transpose().ToString() << std::endl;
 
 	//std::cout << "\n" << m[1][2] << "\n\n";
 	//m[1][2] = 3.14;

@@ -1,7 +1,7 @@
 #include "matrix.h"
 #include <sstream> //ToString
 #include<cassert> //Multiplication
-#include <iostream>
+#include<iostream>
 
 Matrix::Matrix(size_t rows, size_t cols) : rows(rows), cols(cols), data(new Matrix::T[rows*cols]) {};
 
@@ -11,7 +11,7 @@ Matrix::Matrix(std::initializer_list<std::initializer_list<T>> data) : Matrix(da
 	for(auto row : data) for(auto e : row) this->data[i++] = e;
 }
 
-Matrix::Matrix(Matrix&& m) : rows(m.rows), cols(m.rows), data(m.data)
+Matrix::Matrix(Matrix&& m) : rows(m.rows), cols(m.cols), data(m.data)
 {
 	m.data = nullptr;
 }
@@ -25,10 +25,19 @@ Matrix::~Matrix()
 	}
 }
 
-Matrix Matrix::Multiplication(Matrix const& lhs)
+Matrix Matrix::Transpose() const
 {
-	Matrix& rhs = *this; 
-	assert(rhs.cols == lhs.rows && "Dimension missmatch"); //TODO: possibly throw instead of assert
+	Matrix ret(cols, rows);
+
+	for(size_t i = 0; i < rows; ++i) for(size_t j = 0; j < cols; ++j) ret(j,i) = at(i,j);
+
+	return ret;
+}
+
+Matrix Matrix::Multiplication(Matrix const& lhs) const
+{
+	Matrix const& rhs = *this; 
+	assert(rhs.cols == lhs.rows && "Dimension mismatch"); //TODO: possibly throw instead of assert
 	Matrix ret(rhs.rows, lhs.cols);
 
 	double sum{0};
@@ -48,16 +57,17 @@ Matrix Matrix::Multiplication(Matrix const& lhs)
 	return ret;
 }
 
-Matrix Matrix::operator*(Matrix const& lhs) {
+Matrix Matrix::operator*(Matrix const& lhs) const
+{
 	return Multiplication(lhs);
 }
 
-Matrix::T& Matrix::at(size_t row, size_t col)
+Matrix::T& Matrix::at(size_t row, size_t col) const
 {
 	return data[row*cols + col];
 }
 
-Matrix::T& Matrix::operator()(size_t row, size_t col)
+Matrix::T& Matrix::operator()(size_t row, size_t col) const
 {
 	return at(row, col);
 };

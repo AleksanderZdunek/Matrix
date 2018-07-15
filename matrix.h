@@ -12,14 +12,16 @@ public:
 	Matrix(Matrix&& m);
 	~Matrix();
 
+	Matrix Transpose() const;
+
 	Matrix& operator=(Matrix const&) = delete;
 	Matrix& operator=(Matrix&&) = delete;
 
-	Matrix Multiplication(Matrix const& lhs);
-	Matrix operator*(Matrix const& lhs);
+	Matrix Multiplication(Matrix const& lhs) const;
+	Matrix operator*(Matrix const& lhs) const;
 
-	T& at(size_t row, size_t col);
-	T& operator()(size_t row, size_t col);
+	T& at(size_t row, size_t col) const;
+	T& operator()(size_t row, size_t col) const;
 	T* operator[](size_t row) const; 
 
 	std::string ToString();
