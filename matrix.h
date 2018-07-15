@@ -12,10 +12,15 @@ public:
 	Matrix(Matrix&& m);
 	~Matrix();
 
-	Matrix Transpose() const;
-
 	Matrix& operator=(Matrix const&) = delete;
 	Matrix& operator=(Matrix&&) = delete;
+
+	Matrix Transpose() const;
+
+	Matrix Addition(Matrix const& lhs) const;
+	Matrix Subtraction(Matrix const& lhs) const;
+	Matrix operator+(Matrix const& lhs) const;
+	Matrix operator-(Matrix const& lhs) const;
 
 	Matrix Multiplication(Matrix const& lhs) const;
 	Matrix operator*(Matrix const& lhs) const;

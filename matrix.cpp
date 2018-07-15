@@ -34,6 +34,32 @@ Matrix Matrix::Transpose() const
 	return ret;
 }
 
+Matrix Matrix::Addition(Matrix const& lhs) const
+{
+	Matrix ret(rows, cols);
+	size_t size(rows*cols);
+	for(size_t i = 0; i < size; ++i) ret.data[i] = this->data[i] + lhs.data[i];
+	return ret;
+}
+
+Matrix Matrix::Subtraction(Matrix const& lhs) const
+{
+	Matrix ret(rows, cols);
+	size_t size(rows*cols);
+	for(size_t i = 0; i < size; ++i) ret.data[i] = this->data[i] - lhs.data[i];
+	return ret;
+}
+
+Matrix Matrix::operator+(Matrix const& lhs) const
+{
+	return Addition(lhs);
+}
+
+Matrix Matrix::operator-(Matrix const& lhs) const
+{
+	return Subtraction(lhs);
+}
+
 Matrix Matrix::Multiplication(Matrix const& lhs) const
 {
 	Matrix const& rhs = *this; 

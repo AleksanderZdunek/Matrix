@@ -11,6 +11,9 @@ int main(int argc, char* argv[])
 
 	std::cout << m.ToString() << std::endl;
 
+	std::cout << (m + m).ToString() << std::endl;
+	std::cout << (m - m).ToString() << std::endl;
+
 	std::cout << m.Transpose().ToString() << std::endl;
 
 	//std::cout << "\n" << m[1][2] << "\n\n";
