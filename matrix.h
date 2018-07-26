@@ -8,7 +8,7 @@ class Matrix
 public:
 	Matrix(size_t rows, size_t cols);
 	Matrix(std::initializer_list<std::initializer_list<T>> data);
-	Matrix(Matrix const&) = delete;
+	Matrix(Matrix const& m);
 	Matrix(Matrix&& m);
 	~Matrix();
 

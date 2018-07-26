@@ -1,7 +1,9 @@
 #include "matrix.h"
 #include <sstream> //ToString
-#include<cassert> //Multiplication
-#include<iostream>
+#include <cassert> //Multiplication
+#include <cstring> //memcpy
+#include <utility> //std::move
+#include "traceprint.h"
 
 Matrix::Matrix(size_t rows, size_t cols) : rows(rows), cols(cols), data(new Matrix::T[rows*cols]) {};
 
@@ -9,6 +11,12 @@ Matrix::Matrix(std::initializer_list<std::initializer_list<T>> data) : Matrix(da
 {
 	size_t i = 0;
 	for(auto row : data) for(auto e : row) this->data[i++] = e;
+}
+
+Matrix::Matrix(Matrix const& m) : Matrix(m.rows, m.cols)
+{
+	trace << "Warning! Matrix copy constructor";
+	memcpy(this->data, m.data, rows*cols);
 }
 
 Matrix::Matrix(Matrix&& m) : rows(m.rows), cols(m.cols), data(m.data)
